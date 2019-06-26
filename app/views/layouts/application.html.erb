@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RailsShop</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
+ <%= render "shared/head_shop_admin" %>
   <body>
-    <%= yield %>
+  <div class="dashboard-main-wrapper">
+    <%= render "shared/top_nav_shop_admin" %>
+    <%= render "shared/left_nav_shop_admin" %>
+
+    <% if shop_account_signed_in? %>
+      <div class="dashboard-wrapper">
+    <% else %>
+      <div class="container-fluid">
+    <% end %>
+        <%= render "shared/main_content" %>
+      </div>
+  </div>
   </body>
 </html>

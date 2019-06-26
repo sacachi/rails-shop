@@ -1,0 +1,7 @@
+%h1 You are not Login choose one of belows to continues
+
+- if shop_account_signed_in?
+  %li= link_to "Logout", destroy_shop_account_session_path, :method => :delete
+- else
+  %li= link_to "Sign up now!",  new_shop_account_registration_path
+  %li= link_to "Login",  shop_account_session_path

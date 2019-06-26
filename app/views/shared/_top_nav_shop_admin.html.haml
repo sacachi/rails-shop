@@ -1,0 +1,15 @@
+.dashboard-header
+  %nav.navbar.navbar-expand-lg.bg-white.fixed-top
+    %a.navbar-brand{:href => "/"} Rails Shop
+    #navbarSupportedContent.collapse.navbar-collapse
+      %ul.navbar-nav.ml-auto.navbar-right-top
+        - if shop_account_signed_in?
+          %li.nav-item
+            = link_to current_shop_account.email, edit_shop_account_registration_path, class: "nav-link"
+          %li.nav-item
+            = link_to "Logout", destroy_shop_account_session_path, :method => :delete, class: "nav-link"
+        - else
+          %li.nav-item
+            = link_to "Sign up now!",  new_shop_account_registration_path, class: "nav-link"
+          %li.nav-item
+            = link_to "Login",  shop_account_session_path, class: "nav-link"

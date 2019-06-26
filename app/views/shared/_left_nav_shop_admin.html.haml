@@ -1,0 +1,26 @@
+- if shop_account_signed_in?
+  .nav-left-sidebar.sidebar-dark
+    .menu-list
+      %nav.navbar.navbar-expand-lg.navbar-light
+        %a.d-xl-none.d-lg-none{:href => "#"} Dashboard
+        %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNav", "data-toggle" => "collapse", :type => "button"}
+          %span.navbar-toggler-icon
+        #navbarNav.collapse.navbar-collapse
+          %ul.navbar-nav.flex-column
+            %li.nav-divider
+              Menu
+            %li.nav-item
+              %a.nav-link.active{"aria-controls" => "submenu-1", "aria-expanded" => "false", "data-target" => "#submenu-1", "data-toggle" => "collapse", :href => "#"}
+                %i.fa.fa-fw.fa-user-circle>
+                Dashboard
+                %span.badge.badge-success 6
+              #submenu-1.collapse.submenu{:style => ""}
+                %ul.nav.flex-column
+                  %li.nav-item
+                    %a.nav-link{"aria-controls" => "submenu-1-2", "aria-expanded" => "false", "data-target" => "#submenu-1-2", "data-toggle" => "collapse", :href => "#"} E-Commerce
+                    #submenu-1-2.collapse.submenu{:style => ""}
+                      %ul.nav.flex-column
+                        %li.nav-item
+                          %a.nav-link{:href => "index.html"} E Commerce Dashboard
+                  %li.nav-item
+                    %a.nav-link{:href => "dashboard-finance.html"} Finance
