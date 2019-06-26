@@ -2,12 +2,22 @@
   %h2 Sign up
   .card
     .card-header.text-center
-      %span.splash-description Please enter your user information.
+      %span.splash-description Please enter your shop information.
     .card-body
       = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
         = render "devise/shared/error_messages", resource: resource
         .form-group
           = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg", placeholder: "Email"
+        .form-group
+          = f.text_field :shop_name, autofocus: true, autocomplete: "shop_name", class: "form-control form-control-lg", placeholder: "Shop name"
+        .form-group
+          = f.text_field :phone, autofocus: true, autocomplete: "phone", class: "form-control form-control-lg", placeholder: "Phone Number"
+        .form-group
+          = f.text_field :address, autofocus: true, autocomplete: "address", class: "form-control form-control-lg", placeholder: "Your address"
+        .form-group
+          = f.text_area :desc, autofocus: true, autocomplete: "desc", class: "form-control form-control-lg", placeholder: "Description"
+        .form-group
+          = f.text_field :tax_code, autofocus: true, autocomplete: "tax_code", class: "form-control form-control-lg", placeholder: "tax_code"
         .form-group
           - if @minimum_password_length
             %em

@@ -6,7 +6,7 @@ class AddCollumsToShopAccounts < ActiveRecord::Migration[5.2]
     add_column :shop_accounts, :desc, :string
     add_column :shop_accounts, :tax_code, :string
 
-    add_index :shop_name, :email,                unique: true
+    add_index :shop_accounts, :shop_name, unique: true
 
   end
 end

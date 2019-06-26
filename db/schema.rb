@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_25_144656) do
+ActiveRecord::Schema.define(version: 2019_06_26_064531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,8 +23,14 @@ ActiveRecord::Schema.define(version: 2019_06_25_144656) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "shop_name"
+    t.string "phone"
+    t.string "address"
+    t.string "desc"
+    t.string "tax_code"
     t.index ["email"], name: "index_shop_accounts_on_email", unique: true
     t.index ["reset_password_token"], name: "index_shop_accounts_on_reset_password_token", unique: true
+    t.index ["shop_name"], name: "index_shop_accounts_on_shop_name", unique: true
   end
 
 end
