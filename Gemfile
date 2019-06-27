@@ -8,14 +8,14 @@ gem 'rails', '~> 5.2.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 
-#modif
-gem "haml"
+# modif
+gem 'bootstrap', '~> 4.3.1'
+gem 'carrierwave', '1.2.2'
 gem 'devise'
 gem 'font-awesome-rails'
-gem 'bootstrap', '~> 4.3.1'
+gem 'haml'
 gem 'jquery-rails'
-gem 'carrierwave',             '1.2.2'
-gem 'mini_magick',             '4.7.0'
+gem 'mini_magick', '4.7.0'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
@@ -48,9 +48,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem "better_errors"
-  gem "binding_of_caller"
 end
 
 group :development do
