@@ -10,10 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_26_064531) do
+ActiveRecord::Schema.define(version: 2019_06_27_021841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "category_products", force: :cascade do |t|
+    t.bigint "category_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_category_products_on_category_id"
+    t.index ["product_id"], name: "index_category_products_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "desc"
+    t.string "images"
+    t.integer "price"
+    t.bigint "shop_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_account_id"], name: "index_products_on_shop_account_id"
+  end
 
   create_table "shop_accounts", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -33,4 +59,7 @@ ActiveRecord::Schema.define(version: 2019_06_26_064531) do
     t.index ["shop_name"], name: "index_shop_accounts_on_shop_name", unique: true
   end
 
+  add_foreign_key "category_products", "categories"
+  add_foreign_key "category_products", "products"
+  add_foreign_key "products", "shop_accounts"
 end
