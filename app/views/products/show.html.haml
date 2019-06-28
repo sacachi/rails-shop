@@ -8,7 +8,7 @@
 %p
   %strong Cats:
 %ul
-  = @categories.each do |category|
+  - @product.categories.each do |category|
     %li= category.name
 %p
   %strong Images:

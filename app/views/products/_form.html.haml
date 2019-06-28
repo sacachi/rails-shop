@@ -12,12 +12,12 @@
     = form.text_field :name, class: "form-control form-control-lg"
   .form-group
     = form.label :desc
-    = form.text_field :desc, class: "form-control form-control-lg"
+    = form.text_area :desc, class: "form-control form-control-lg"
   .form-group
     %p Select Categories
-    = form.select(:categories, @categories.collect {|p| [ p.name, p.id ] }, |
-      { :prompt => "Please select"},                                        |
-      { :multiple => true, :size => @categories.count + 1 })                |
+    = form.select(:category_products, @categories.collect {|category| [ category.name, category.id ] },
+                  { selected: @product.categories.collect(&:id) },
+                  { multiple: true, size: @categories.count } )
   .form-group
     = form.label :images
     = form.file_field :images

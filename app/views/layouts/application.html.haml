@@ -1,12 +1,20 @@
 %html
   %body
-    = render "shared/head_shop_admin"
-    .dashboard-main-wrapper
-      = render "shared/top_nav_shop_admin"
-      = render "shared/left_nav_shop_admin"
-      - if shop_account_signed_in?
-        .dashboard-wrapper
-          = render "shared/main_content"
-      - else
-        .container-fluid
-          = render "shared/main_content"
+    - if !current_shop_account.nil? || request.url.include?("shop_accounts")
+      = render "shared/head_shop_admin"
+      .dashboard-main-wrapper
+        = render "shared/top_nav_shop_admin"
+        = render "shared/left_nav_shop_admin"
+        - if shop_account_signed_in?
+          .dashboard-wrapper
+            = render "shared/main_content"
+        - else
+          .container-fluid
+            = render "shared/main_content"
+    - else
+      = render "customer/head"
+      %body.customer
+        =render "customer/top_nav"
+        =render "customer/content"
+        =render "customer/footer"
+

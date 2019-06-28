@@ -10,7 +10,6 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    @categories = @product.categories
   end
 
   # GET /products/new
@@ -32,7 +31,7 @@ class ProductsController < ApplicationController
     @product.shop_account_id = current_shop_account.id if current_shop_account
     respond_to do |format|
       if @product.save
-        params['product']['categories'].each do |category|
+        params['product']['category_products'].each do |category|
           @product.category_products.create!(category_id: category) unless category.blank?
         end
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -49,6 +48,12 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
+        @product.category_products.each do |category|
+          category.destroy
+        end
+        params['product']['category_products'].each do |category|
+          @product.category_products.create!(category_id: category) unless category.blank?
+        end
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
@@ -77,6 +82,11 @@ class ProductsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
-    params.require(:product).permit(:name, :desc, :images, :price, :shop_account_id)
+    params
+      .require(:product)
+      .permit(
+        :name, :desc, :images, :price, :shop_account_id,
+        category_products_attributes: [:id, :product, :category]
+      )
   end
 end
