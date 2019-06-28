@@ -1,0 +1,22 @@
+%h1 Product details
+%p
+  %strong Name:
+  = @product.name
+%p
+  %strong Desc:
+  = @product.desc
+%p
+  %strong Cats:
+%ul
+  = @categories.each do |category|
+    %li= category.name
+%p
+  %strong Images:
+  - if @product.images.present?
+    = image_tag @product.images_url, :class => "image-thumb"
+%p
+  %strong Price:
+  = @product.price
+= link_to 'Edit', edit_product_path(@product), class: "btn btn-info"
+|
+= link_to 'Back', products_path, class: "btn btn-info"
