@@ -32,8 +32,8 @@ class ProductsController < ApplicationController
     @product.shop_account_id = current_shop_account.id if current_shop_account
     respond_to do |format|
       if @product.save
-        params['product']['categories'].each do |c|
-          @product.category_products.create!(category_id: c) unless c.blank?
+        params['product']['categories'].each do |category|
+          @product.category_products.create!(category_id: category) unless category.blank?
         end
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
