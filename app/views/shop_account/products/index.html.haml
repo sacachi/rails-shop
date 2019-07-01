@@ -16,8 +16,8 @@
           \...
         %td= image_tag product.images_url, :class => "image-thumb" if product.images?
         %td= product.price
-        %td= link_to 'Show', product, :class => "btn btn-info"
-        %td= link_to 'Edit', edit_product_path(product), :class => "btn btn-info"
+        %td= link_to 'Show', shop_account_product_path(product), :class => "btn btn-info"
+        %td= link_to 'Edit', edit_shop_account_product_path(product), :class => "btn btn-info"
         %td= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-warning"
 %br/
-= link_to 'New Product', new_product_path, :class => "btn btn-primary"
+= link_to 'New Product', new_shop_account_product_path, :class => "btn btn-primary"
