@@ -14,4 +14,3 @@ if Category.count.zero?
                       desc: 'Shop moi voi cac san pham moi dep qua troi',
                       created_at: Time.current)
 end
-

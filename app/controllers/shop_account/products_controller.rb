@@ -11,8 +11,7 @@ class ShopAccount
 
     # GET /products/1
     # GET /products/1.json
-    def show
-    end
+    def show; end
 
     # GET /products/new
     def new
@@ -86,7 +85,7 @@ class ShopAccount
         .require(:product)
         .permit(
           :name, :desc, :images, :price, :shop_account_id,
-          category_products_attributes: [:id, :product, :category]
+          category_products_attributes: %i[id product category]
         )
     end
   end

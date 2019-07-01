@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   devise_for :users, path: 'users'
   get '/search' => 'search#search', :as => 'search'
   get '/search/:query' => 'search#index'
@@ -12,8 +11,8 @@ Rails.application.routes.draw do
     resources :categories
     resources :products
   end
-  resources :categories, only: [:show, :index]
-  resources :products, only: [:show, :index]
+  resources :categories, only: %i[show index]
+  resources :products, only: %i[show index]
   get 'shop_admin/index'
   root to: 'pages#home'
   devise_for :shop_accounts
