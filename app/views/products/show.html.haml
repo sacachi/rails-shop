@@ -1,0 +1,18 @@
+%h1 Products Details
+.row.wow.fadeIn{:style => "visibility: visible; animation-name: fadeIn;"}
+  .col-md-6.mb-4
+    = image_tag @product.images_url, class: "img-fluid"
+  .col-md-6.mb-4
+    .mb-3
+      - @product.categories.each do |category|
+        %span.mr-1=link_to category.name, category_path(category)
+    %h2= @product.name
+    .product-details
+      %span.mr-1.font-bold Price:
+      %span.mr-1= "$" + @product.price.to_s
+      .mr-1.font-bold Description
+      %p= @product.desc
+    %form.d-flex.justify-content-left
+      %input.form-control{"aria-label" => "Search", :style => "width: 100px", :type => "number", :value => "1"}/
+      %button.btn.btn-danger.ml-3{:type => "submit"}
+        Add to cart

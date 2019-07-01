@@ -1,0 +1,11 @@
+.card.h-100
+  - unless product.images.blank?
+    = link_to image_tag(product.images_url, class:  "card-img-top", height: 200,  width: 200), product_path(product)
+  .d-flex
+    = link_to product.name, product_path(product), class: "col-8 mt-2"
+    .col-4= '$ ' + product.price.to_s
+  .font-bold.col-12.mt-2.mb-2= link_to product.shop_account.shop_name, shop_account_products_path
+  .d-flex
+    %span.col-5.btn.btn-danger.shadow ADD TO CART
+    %span.col-2
+    %span.col-5.btn.btn-info.text-white.shadow=link_to "DETAIL", product_path(product), option_html = {class: 'text-white'}

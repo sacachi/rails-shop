@@ -1,11 +1,13 @@
-.container
+.container.container-content
   .row
     .col-lg-3
-      %h1.my-4 Shop Name
       .list-group
-        - @categories.each do |category|
-          =link_to(category.name, category_path(category), html_options = { class: "list-group-item"})
+        =link_to('Categories', "/", html_options = { class: "list-group-item"})
+        -unless @categories.blank?
+          - @categories.each do |category|
+            =link_to(category.name, category_path(category), html_options = { class: "list-group-item"})
     .col-lg-9
+      = render 'customer/search_form'
       =yield
 
 

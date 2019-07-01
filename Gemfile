@@ -16,6 +16,9 @@ gem 'font-awesome-rails'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'mini_magick', '4.7.0'
+gem 'kaminari'
+gem 'devise-bootstrap-views', '~> 1.0'
+
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'

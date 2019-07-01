@@ -1,6 +1,6 @@
 %html
   %body
-    - if !current_shop_account.nil? || request.url.include?("shop_accounts")
+    - if request.url.include?("shop_account")
       = render "shared/head_shop_admin"
       .dashboard-main-wrapper
         = render "shared/top_nav_shop_admin"
