@@ -12,7 +12,7 @@
       %span.mr-1= "$" + @product.price.to_s
       .mr-1.font-bold Description
       %p= @product.desc
-    %form.d-flex.justify-content-left
-      %input.form-control{"aria-label" => "Search", :style => "width: 100px", :type => "number", :value => "1"}/
-      %button.btn.btn-danger.ml-3{:type => "submit"}
-        Add to cart
+    = form_tag '/add-to-cart', method: :post, remote: :true, class: "d-flex justify-content-left" do
+      = hidden_field_tag :product_id, @product.id
+      = text_field_tag :number, 1, class: "form-controle", type: :number, style: "width: 60px", min: 1
+      = submit_tag "Add to cart", class: "btn btn-danger ml-3"
