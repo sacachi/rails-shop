@@ -1,0 +1,18 @@
+.splash-container
+  .card
+    .card-header.text-center
+      %span.splash-description Please enter your user information.
+    .card-body
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .form-group
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg", placeholder: "Email"
+        .form-group
+          = f.password_field :password, autocomplete: "current-password", placeholder: "Password", class: "form-control form-control-lg"
+        - if devise_mapping.rememberable?
+          .form-group
+            %label.custom-control.custom-checkbox
+              = f.check_box :remember_me, class: "custom-control-input"
+              %span.custom-control-label Remember Me
+        = f.submit "Sign in", class: "btn btn-primary btn-lg btn-block"
+    = render "devise/shared/links"
+

@@ -1,0 +1,29 @@
+.splash-container
+  %h2 Sign up YOUR USER ACCOUNT
+  .card
+    .card-header.text-center
+      %span.splash-description Please enter your information.
+    .card-body
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        = render "devise/shared/error_messages", resource: resource
+        .form-group
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg", placeholder: "Email"
+        .form-group
+          = f.text_field :user_name, autofocus: true, autocomplete: "shop_name", class: "form-control form-control-lg", placeholder: "Username"
+        .form-group
+          = f.text_field :phone, autofocus: true, autocomplete: "phone", class: "form-control form-control-lg", placeholder: "Phone Number"
+        .form-group
+          = f.text_field :address, autofocus: true, autocomplete: "address", class: "form-control form-control-lg", placeholder: "Your address"
+        .form-group
+          - if @minimum_password_length
+            %em
+              (#{@minimum_password_length} characters minimum)
+        .form-group
+          = f.password_field :password, autocomplete: "new-password", placeholder: "Password", class: "form-control form-control-lg"
+        .form-group
+          = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password Confirm", class: "form-control form-control-lg"
+        .actions
+          = f.submit "Sign up",  class: "btn btn-primary btn-lg btn-block"
+    = render "devise/shared/links"
+
+

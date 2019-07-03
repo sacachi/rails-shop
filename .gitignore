@@ -27,4 +27,5 @@
 /config/master.key
 
 #Ignore .idea folder
-.idea/rails-shop.iml
+/.idea/
+

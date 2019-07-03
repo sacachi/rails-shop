@@ -1,0 +1,2 @@
+module ShopAccount::CategoriesHelper
+end
