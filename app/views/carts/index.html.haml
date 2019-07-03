@@ -7,12 +7,15 @@
       %th Price
       %th Quantity
       %th Total
+      %th
   %tbody
     -unless @carts.blank?
       - @carts.each do |cart|
         %tr
-          %td=cart['name']
-          %td=image_tag cart['image'], class: "image-thumb"
-          %td=cart['price']
-          %td=cart['number']
-          %td=cart['total']
+          %td= cart['name']
+          %td= image_tag cart['image'], class: "image-thumb"
+          %td= cart['price']
+          %td= cart['number']
+          %td= cart['total']
+          %td
+            = link_to 'Delete', cart_delete_path(cart['product_id']), confirm: "Are you sure?"
