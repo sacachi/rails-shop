@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  get '/cart/:id/delete' => 'carts#destroy', as: :cart_delete
+  namespace :carts do
+    post :update
+    delete :delete
+    post :save
+    get :show
+  end
   post '/add-to-cart' => 'carts#create'
   get '/cart' => 'carts#index'
   devise_for :users, path: 'users', controllers: { registrations: 'users/registrations' }
