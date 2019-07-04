@@ -1,0 +1,16 @@
+%h1 Order Detail
+%table.table.table-bordered
+  %thead.thead-dark
+    %tr
+      %th Customer
+      %th Order_id
+      %th Order_date
+      %th Total
+      %th
+  %tbody
+    - if @orders.present?
+      - @orders.each do |order|
+        %tr
+          %td= order.user.name
+
+

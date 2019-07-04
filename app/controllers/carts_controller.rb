@@ -1,4 +1,6 @@
 class CartsController < ApplicationController
+  before_action :not_shop_account?
+
   def create
     session['cart'] ||= []
     product_cart = Product.find_by(id: params[:product_id])
@@ -6,12 +8,14 @@ class CartsController < ApplicationController
 
     productadd = build_product_add(product_cart)
     index = index_product(productadd['product_id'])
+
     if index.blank?
       add_product_to_cart(productadd)
     else
       index_cart_number(index, productadd['number'], true)
       update_total_price(index)
     end
+
     flash[:success] = 'Successful added your products to cart'
     redirect_to carts_path
   end
@@ -70,5 +74,14 @@ class CartsController < ApplicationController
       'image' => product_cart.images_url,
       'total' => product_cart.price.to_i * params[:number].to_i
     }
+  end
+
+  private
+
+  def not_shop_account?
+    if shop_account_signed_in?
+      flash[:danger] = 'You need to have User - Account to buy product'
+      redirect_to shop_account_products_path
+    end
   end
 end

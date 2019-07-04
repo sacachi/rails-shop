@@ -10,21 +10,22 @@ class OrdersController < ApplicationController
       session['cart'].each do |cart|
         product = Product.find_by(id: cart['product_id'])
 
-        next unless product.present?
+        if product.present?
 
-        order_product = order.order_products.new(
-          number: cart['number'],
-          product_id: product,
-          price: product.price
-        )
+          order_product = order.order_products.create!(
+            number: cart['number'],
+            product_id: product.id,
+            price: product.price
+          )
 
-        order_product.save
+          order_product.save
+        end
       end
     end
 
     session['cart'] = []
     flash[:info] = 'Your order successfully'
-    redirect_to carts_path
+    redirect_to order_path(order)
   end
 
   def index

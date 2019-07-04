@@ -1,5 +1,5 @@
 %h1 Order Detail
-%table.table
+%table.table.table-bordered
   %thead.thead-dark
     %tr
       %th Product
@@ -12,7 +12,8 @@
     - if @orders.present?
       - @orders.each do |order|
         %tr
-          %td{colspan: 6, class: "text-center"}= link_to  "Orders " "#" + order.id.to_s , order_path(order.id)
+          - order_title = "Orders " "#" + order.id.to_s + ' At: ' +order.created_at.strftime("%d/%m/%Y")
+          %td{colspan: 6, class: "text-center bg-light"}= link_to  order_title, order_path(order.id)
         - order.order_products.each do |order_product|
           %tr
             %td= order_product.product.name

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :shop_account do
     resources :categories
     resources :products
+    resources :shop_orders
   end
   resources :categories, only: %i[show index]
   resources :products, only: %i[show index]

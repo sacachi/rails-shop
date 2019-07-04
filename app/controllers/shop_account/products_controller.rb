@@ -7,11 +7,14 @@ class ShopAccount
     # GET /products.json
     def index
       @products = Product.all
+      @categories = Category.all
     end
 
     # GET /products/1
     # GET /products/1.json
-    def show; end
+    def show
+      @categories = Category.all
+    end
 
     # GET /products/new
     def new
