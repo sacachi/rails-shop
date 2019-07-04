@@ -1,0 +1,20 @@
+%h1 Order Detail
+%table.table
+  %thead.thead-dark
+    %tr
+      %th Order date
+      %th Product
+      %th Image
+      %th Price
+      %th Quantity
+      %th Total
+  %tbody
+    -if @order.present?
+      - @order.order_products.each do |order_product|
+        %tr
+          %th= @order.created_at.strftime("%d/%m/%Y")
+          %td= order_product.product.name
+          %td= image_tag order_product.product.images_url, class: "image-thumb"
+          %td= order_product.price
+          %td= order_product.number
+          %td= order_product.price * order_product.number

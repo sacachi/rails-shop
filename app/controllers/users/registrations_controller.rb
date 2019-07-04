@@ -1,5 +1,4 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-
   protected
 
   def configure_permitted_parameters

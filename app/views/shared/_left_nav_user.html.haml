@@ -8,12 +8,12 @@
           %li.nav-item
             %a.nav-link.active{"aria-controls" => "submenu-1", "aria-expanded" => "false", "data-target" => "#submenu-1", "data-toggle" => "collapse", :href => "#"}
               %i.fa.fa-fw.fa-user-circle>
-              Shop information
+              Your information
               %span.badge.badge-success 6
             #submenu-1.collapse.submenu{:style => ""}
               %ul.nav.flex-column
                 %li.nav-item
-                  %a.nav-link{:href => edit_shop_account_registration_path} Change information
+                  %a.nav-link{:href => edit_user_registration_path} Change information
           %li.nav-item
             %a.nav-link.active{"aria-controls" => "submenu-1-2", "aria-expanded" => "false", "data-target" => "#submenu-1-2", "data-toggle" => "collapse", :href => "#"}
               %i.fa.fa-fw.fa-product-hunt>
@@ -22,7 +22,4 @@
             #submenu-1-2.collapse.submenu{:style => ""}
               %ul.nav.flex-column
                 %li.nav-item
-                  %a.nav-link{:href => shop_account_categories_path} Categories
-                %li.nav-item
-                  %a.nav-link{:href => shop_account_products_path} Products
-
+                  %a.nav-link{href: orders_path} Orders

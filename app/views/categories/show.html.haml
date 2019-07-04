@@ -1,7 +1,7 @@
 %h1 #{@products.count} Products in #{@category.name}
-.row
+.row.mb-3
   - @products.each do |product|
-    .col-lg-4.col-md-4.mb-12
+    .col-lg-4.col-md-4.mb-3
       = render 'shared/cart_form', product: product
 
 = paginate @products
