@@ -1,12 +1,6 @@
 Rails.application.routes.draw do
-  namespace :carts do
-    post :update
-    delete :delete
-    post :save
-    get :show
-  end
-  post '/add-to-cart' => 'carts#create'
-  get '/cart' => 'carts#index'
+  resources :orders
+  resources :carts
   devise_for :users, path: 'users', controllers: { registrations: 'users/registrations' }
   get '/search' => 'search#search', :as => 'search'
   get '/search/:query' => 'search#index'

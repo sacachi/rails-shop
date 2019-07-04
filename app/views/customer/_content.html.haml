@@ -1,7 +1,7 @@
 .container.container-content
   .row
     .col-lg-3
-      .list-group
+      .list-group.mb-3
         =link_to('Categories', "/", html_options = { class: "list-group-item"})
         -unless @categories.blank?
           - @categories.each do |category|

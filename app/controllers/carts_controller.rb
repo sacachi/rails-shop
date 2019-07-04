@@ -1,7 +1,4 @@
 class CartsController < ApplicationController
-  before_action :user_logged_in?, only: :save
-  before_action :cart_empty?, only: :save
-
   def create
     session['cart'] ||= []
     product_cart = Product.find_by(id: params[:product_id])
@@ -12,50 +9,25 @@ class CartsController < ApplicationController
     if index.blank?
       add_product_to_cart(productadd)
     else
-      index_cart_number(index, productadd['number'])
+      index_cart_number(index, productadd['number'], true)
       update_total_price(index)
     end
     flash[:success] = 'Successful added your products to cart'
-    redirect_to '/cart'
+    redirect_to carts_path
   end
 
-  def delete
-    session['cart'].delete_if { |key| key['product_id'] == params['format'].to_i }
+  def destroy
+    session['cart'].delete_if { |key| key['product_id'] == params['id'].to_i }
     flash[:success] = 'Successful deleted your products'
-    redirect_to '/cart'
+    redirect_to carts_path
   end
 
   def update
-    index = index_product(params[:product_id])
-    index_cart_number(index, params['number'])
+    index = index_product(params[:id])
+    index_cart_number(index, params['number'], false)
     update_total_price(index)
     flash[:success] = 'Successful updated your products'
-    redirect_to '/cart'
-  end
-
-  def show
-    @categories = Category.all
-    @orders = Order.where(customer_id: current_user.id)
-    render 'show'
-  end
-
-  def save
-    order = Order.new
-    order.customer_id = current_user.id
-    if order.save
-      session['cart'].each do |cart|
-        product = Product.find_by(id: cart['product_id'])
-        order_product = order.order_products.new
-        order_product.product = product
-        order_product.number = cart['number']
-        order_product.price = product.price
-        order_product.save
-      end
-    end
-
-    session['cart'] = []
-    flash[:info] = 'Your order successfully'
-    redirect_to carts_show_path
+    redirect_to carts_path
   end
 
   def index
@@ -63,27 +35,17 @@ class CartsController < ApplicationController
     @categories = Category.all
   end
 
-  private
-
-  def cart_empty?
-    if session['cart'].blank?
-      flash[:danger] = 'You need to buy something before check out!'
-      redirect_to '/cart'
-    end
-  end
-
-  def user_logged_in?
-    redirect_to new_user_session_path, alert: 'You need login to continue' unless user_signed_in?
-  end
-
-  private
-
   def add_product_to_cart(productadd)
     session['cart'] << productadd
   end
 
-  def index_cart_number(index, value)
-    session['cart'][index]['number'] = session['cart'][index]['number'].to_i + value.to_i
+  def index_cart_number(index, value, boolen)
+    session['cart'][index]['number'] =
+      if boolen
+        session['cart'][index]['number'].to_i + value.to_i
+      else
+        value.to_i
+       end
   end
 
   def update_total_price(index)

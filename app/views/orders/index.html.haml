@@ -2,20 +2,24 @@
 %table.table
   %thead.thead-dark
     %tr
-      %th Order-Code
       %th Product
       %th Image
       %th Price
       %th Quantity
       %th Total
+      %th
   %tbody
-    -unless @orders.blank?
+    - if @orders.present?
       - @orders.each do |order|
+        %tr
+          %td{colspan: 6, class: "text-center"}= link_to  "Orders " "#" + order.id.to_s , order_path(order.id)
         - order.order_products.each do |order_product|
           %tr
-            %th= order.id
             %td= order_product.product.name
             %td= image_tag order_product.product.images_url, class: "image-thumb"
             %td= order_product.price
             %td= order_product.number
             %td= order_product.price * order_product.number
+            %td= link_to "View", product_path(order_product.product.id)
+
+

@@ -3,8 +3,12 @@
     = render "shared/head_shop_admin"
     .dashboard-main-wrapper
       = render "shared/top_nav_shop_admin"
-      = render "shared/left_nav_shop_admin"
       - if shop_account_signed_in?
+        = render "shared/left_nav_shop_admin"
+        .dashboard-wrapper
+          = render "shared/main_content"
+      - elsif user_signed_in?
+        = render "shared/left_nav_user"
         .dashboard-wrapper
           = render "shared/main_content"
       - else
