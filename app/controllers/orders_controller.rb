@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
 
         if product.present?
 
-          order_product = order.order_products.create!(
+          order_product = order.order_products.create(
             number: cart['number'],
             product_id: product.id,
             price: product.price
