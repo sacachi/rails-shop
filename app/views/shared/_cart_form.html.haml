@@ -6,9 +6,9 @@
     .col-4= '$ ' + product.price.to_s
   .font-bold.col-12.mt-2.mb-2= link_to product.shop_account.shop_name, shop_account_products_path
   .d-flex
-    = form_tag carts_path, method: :post, remote: :true do
-      = hidden_field_tag :product_id, product.id
-      = hidden_field_tag :number, 1
-      = submit_tag 'ADD TO CART', class: "col-5 btn btn-danger shadow"
-    %span.col-2
-    %span.col-5.btn.btn-info.text-white.shadow=link_to "DETAIL", product_path(product), option_html = {class: 'text-white'}
+    .col-6
+    .col-6
+      = form_tag carts_path, method: :post do
+        = hidden_field_tag :product_id, product.id
+        = hidden_field_tag :number, 1
+        = submit_tag 'ADD TO CART', class: "btn btn-danger shadow"

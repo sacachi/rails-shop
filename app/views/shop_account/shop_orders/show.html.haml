@@ -1,4 +1,17 @@
-%h1 Order Detail
+%h1 Order ##{ @order.id}  detail
+%h2 Customer information
+%table.table.table-bordered
+  %tbody
+    %tr
+      %th Name
+      %td= @order.user.user_name
+    %tr
+      %th Phone
+      %td= @order.user.phone
+    %tr
+      %th Address
+      %td= @order.user.address
+%h2.mb-2.mt-2 Order
 %table.table.table-bordered
   %thead.thead-dark
     %tr
@@ -17,7 +30,10 @@
         %td= order_product.price
         %td= order_product.number
         %td= total_at_product(order_product)
-  %tr
-    %td{colspan: 5, class:"bg-light text-right"} Total
-    %td= total(@order)
+    %tr
+      %td{colspan: 5, class:"bg-light text-right"} Total
+      %td= total(@order)
+.btn.btn-info.pull-right.mb-2.mt-2
+  = link_to "Back to orders", shop_account_shop_orders_path, class: "text-white"
+
 

@@ -12,13 +12,13 @@
     -unless @carts.blank?
       - @carts.each do |cart|
         %tr
-          = form_tag cart_path(cart['product_id']), method: :put, remote: :true do
+          = form_tag cart_path(cart['product_id']), method: :put do
             = hidden_field_tag :product_id, cart['product_id']
             %td= cart['name']
             %td= image_tag cart['image'], class: "image-thumb"
             %td= cart['price']
             %td
-              = number_field_tag :number, cart['number']
+              = number_field_tag :number, cart['number'], min: 1
             %td= cart['total']
             %td
               = link_to cart_path(cart['product_id']), method: :delete, data: { confirm: "Are you sure?" } do
@@ -26,5 +26,5 @@
             %td
               = button_tag do
                 %i.fa.fa-refresh.text-info
-= link_to orders_path, method: :post, class: "float-right btn btn-warning btn-rounded mt-2" do
+= link_to orders_path, method: :post, class: "float-right btn btn-warning btn-rounded mt-2 mb-2" do
   Confirm order

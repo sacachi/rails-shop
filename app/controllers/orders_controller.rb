@@ -12,9 +12,9 @@ class OrdersController < ApplicationController
 
         next unless product.present?
 
-        order_product = order.order_products.new(
+        order_product = order.order_products.build(
           number: cart['number'],
-          product_id: product,
+          product_id: product.id,
           price: product.price
         )
 
@@ -24,7 +24,9 @@ class OrdersController < ApplicationController
 
     session['cart'] = []
     flash[:info] = 'Your order successfully'
-    redirect_to carts_path
+    redirect_to order_path(order)
+    OrderMailer.user_mail(order.id).deliver_later
+    OrderMailer.shop_mail(order.id).deliver_later
   end
 
   def index

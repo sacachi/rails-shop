@@ -6817,3 +6817,14 @@ body.customer {
   .container.container-content { margin-top: 70px}
 }
 img.image-thumb { width: 100px }
+i.fa.fa-shopping-cart { font-size: 20px }
+div#cart-id {position: absolute;
+  top: 0;
+  right: -9px;
+  background: rgba(252, 217, 222, 0.64);
+  border-radius: 50%;
+  color: red;
+  width: 20px;
+  height: 20px;
+  text-align: center;}
+div.cart-id { position: relative}

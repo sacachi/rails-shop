@@ -1,0 +1,19 @@
+%h1 Your shop list orders
+%table.table.table-bordered
+  %thead.thead-dark
+    %tr
+      %th Customer
+      %th Order_id
+      %th Order_date
+      %th Total
+      %th
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td= order.user.user_name
+        %td= '#' + order.id.to_s
+        %td= order.created_at.strftime("%d/%m/%Y")
+        %td= total(order)
+        %td= link_to "view", shop_account_shop_order_path(order.id)
+
+
