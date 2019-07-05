@@ -2,6 +2,8 @@
   .container-fluid.dashboard-content
     - if notice
       %p.notice= notice
-    - if alert
+    - elsif alert
       %p.alert= alert
+    - else
+      = render 'shared/flash'
     = yield

@@ -2,6 +2,7 @@ class ShopAccount
   class ProductsController < ::ApplicationController
     before_action :authenticate_shop_account!
     before_action :set_product, only: %i[show edit update destroy]
+    layout 'admin'
 
     # GET /products
     # GET /products.json
@@ -38,7 +39,7 @@ class ShopAccount
           params['product']['category_products'].reject!(&:blank?).each do |category|
             @product.category_products.create!(category_id: category)
           end
-          format.html { redirect_to @product, notice: 'Product was successfully created.' }
+          format.html { redirect_to shop_account_products_path, notice: 'Product was successfully created.' }
           format.json { render :show, status: :created, location: @product }
         else
           format.html { render :new }
@@ -56,7 +57,7 @@ class ShopAccount
           params['product']['category_products'].reject!(&:blank?).each do |category|
             @product.category_products.create!(category_id: category)
           end
-          format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+          format.html { redirect_to shop_account_product_path(@product),notice: 'Product was successfully updated.' }
           format.json { render :show, status: :ok, location: @product }
         else
           format.html { render :edit }
@@ -70,7 +71,7 @@ class ShopAccount
     def destroy
       @product.destroy
       respond_to do |format|
-        format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+        format.html { redirect_to shop_account_products_url, notice: 'Product was successfully destroyed.' }
         format.json { head :no_content }
       end
     end

@@ -20,7 +20,7 @@
             %td= image_tag order_product.product.images_url, class: "image-thumb"
             %td= order_product.price
             %td= order_product.number
-            %td= order_product.price * order_product.number
+            %td= total_at_product(order_product)
             %td= link_to "View", product_path(order_product.product.id)
 
 

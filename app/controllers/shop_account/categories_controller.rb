@@ -1,6 +1,7 @@
 class ShopAccount
   class CategoriesController < ::ApplicationController
     before_action :set_category, only: %i[show edit update destroy]
+    layout 'admin'
 
     # GET /categories
     # GET /categories.json
@@ -10,7 +11,9 @@ class ShopAccount
 
     # GET /categories/1
     # GET /categories/1.json
-    def show; end
+    def show
+      @categories = Category.all
+    end
 
     # GET /categories/new
     def new
@@ -18,7 +21,9 @@ class ShopAccount
     end
 
     # GET /categories/1/edit
-    def edit; end
+    def edit
+      @categories = Category.all
+    end
 
     # POST /categories
     # POST /categories.json
@@ -27,7 +32,10 @@ class ShopAccount
 
       respond_to do |format|
         if @category.save
-          format.html { redirect_to @category, notice: 'Category was successfully created.' }
+          format.html do
+            redirect_to shop_account_categories_path,
+                        notice: 'Category was successfully created.'
+          end
           format.json { render :show, status: :created, location: @category }
         else
           format.html { render :new }
@@ -41,7 +49,10 @@ class ShopAccount
     def update
       respond_to do |format|
         if @category.update(category_params)
-          format.html { redirect_to @category, notice: 'Category was successfully updated.' }
+          format.html do
+            redirect_to shop_account_category_path(@category),
+                        notice: 'Category was successfully updated.'
+          end
           format.json { render :show, status: :ok, location: @category }
         else
           format.html { render :edit }

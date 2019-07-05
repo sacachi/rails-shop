@@ -10,22 +10,23 @@ class OrdersController < ApplicationController
       session['cart'].each do |cart|
         product = Product.find_by(id: cart['product_id'])
 
-        if product.present?
+        next unless product.present?
 
-          order_product = order.order_products.create(
-            number: cart['number'],
-            product_id: product.id,
-            price: product.price
-          )
+        order_product = order.order_products.build(
+          number: cart['number'],
+          product_id: product.id,
+          price: product.price
+        )
 
-          order_product.save
-        end
+        order_product.save
       end
     end
 
     session['cart'] = []
     flash[:info] = 'Your order successfully'
     redirect_to order_path(order)
+    OrderMailer.user_mail(order.id).deliver_later
+    OrderMailer.shop_mail(order.id).deliver_later
   end
 
   def index

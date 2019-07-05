@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   private
 
   def layout_by_resource
-    devise_controller? ? 'admin': 'application'
+    devise_controller? ? 'admin' : 'customer'
   end
 
   protected

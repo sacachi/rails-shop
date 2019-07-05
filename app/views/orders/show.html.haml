@@ -1,5 +1,4 @@
 %h1 Order Detail
-- total = 0
 %table.table.table-bordered
   %thead.thead-dark
     %tr
@@ -10,18 +9,15 @@
       %th Quantity
       %th Total
   %tbody
-    -if @order.present?
-      - @order.order_products.each do |order_product|
-        %tr
-          %th= @order.created_at.strftime("%d/%m/%Y")
-          %td= order_product.product.name
-          %td= image_tag order_product.product.images_url, class: "image-thumb"
-          %td= order_product.price
-          %td= order_product.number
-          - ptotal = order_product.price * order_product.number
-          - total +=ptotal
-          %td= ptotal
-    %tr
-      %td{colspan: 5, class:"bg-light text-right"} Total
-      %td= total
+    - @order.order_products.each do |order_product|
+      %tr
+        %th= @order.created_at.strftime("%d/%m/%Y")
+        %td= order_product.product.name
+        %td= image_tag order_product.product.images_url, class: "image-thumb"
+        %td= order_product.price
+        %td= order_product.number
+        %td= total_at_product(order_product)
+  %tr
+    %td{colspan: 5, class:"bg-light text-right"} Total
+    %td= total(@order)
 
