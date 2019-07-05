@@ -1,13 +1,14 @@
 class ShopAccount
   class ProductsController < ::ApplicationController
     before_action :authenticate_shop_account!
+    before_action :same_shop_account?, only: [:edit, :update, :destroy]
     before_action :set_product, only: %i[show edit update destroy]
     layout 'admin'
 
     # GET /products
     # GET /products.json
     def index
-      @products = Product.all
+      @products = Product.all.page params[:page]
       @categories = Category.all
     end
 
@@ -78,12 +79,10 @@ class ShopAccount
 
     private
 
-    # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
       params
         .require(:product)
@@ -91,6 +90,14 @@ class ShopAccount
           :name, :desc, :images, :price, :shop_account_id,
           category_products_attributes: %i[id product category]
         )
+    end
+
+    def same_shop_account?
+      @product = Product.find(params[:id])
+      unless @product.shop_account.id == current_shop_account.id
+        flash[:danger] =  'You can not do anything here'
+        redirect_to shop_account_products_path
+      end
     end
   end
 end

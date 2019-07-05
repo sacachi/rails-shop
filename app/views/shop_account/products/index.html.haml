@@ -19,5 +19,5 @@
         %td= link_to 'Show', shop_account_product_path(product), :class => "btn btn-info"
         %td= link_to 'Edit', edit_shop_account_product_path(product), :class => "btn btn-info"
         %td= link_to 'Destroy', shop_account_product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-warning"
-%br/
-= link_to 'New Product', new_shop_account_product_path, :class => "btn btn-primary"
+= paginate @products
+= link_to 'New Product', new_shop_account_product_path, :class => "btn btn-primary mt-2"
